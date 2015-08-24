@@ -1,0 +1,189 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.deantech.bleepbloop.PlayActivity"
+    android:id="@+id/playAct"
+    android:background="@drawable/bleepbloop"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Username"
+        android:id="@+id/uNameText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="136dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Bleep Bloop-Score"
+        android:id="@+id/titleText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="36dp"
+        android:textIsSelectable="false"
+        android:textColor="#ffffffff"
+        android:textStyle="bold|italic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="GS: "
+        android:id="@+id/GSTV"
+        android:layout_below="@+id/uNameText"
+        android:layout_alignStart="@+id/titleText"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="TAS: "
+        android:id="@+id/TATV"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/GSTV"
+        android:layout_alignStart="@+id/GSTV"
+        android:visibility="invisible" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Using TrueAchievments"
+        android:id="@+id/textView5"
+        android:textStyle="italic"
+        android:textColor="#ffffffff"
+        android:layout_below="@+id/titleText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Drinks"
+        android:id="@+id/textView6"
+        android:textStyle="bold"
+        android:textSize="36dp"
+        android:textColor="#ffffffff"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/uNameText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/drinksTV"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Key:"
+        android:id="@+id/keyTV"
+        android:layout_below="@+id/TATV"
+        android:layout_alignStart="@+id/TATV"
+        android:textStyle="bold"
+        android:textColor="#ffffffff" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pnts ToGo:"
+        android:id="@+id/textView8"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_below="@+id/drinksTV"
+        android:layout_alignStart="@+id/uNameText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="0"
+        android:id="@+id/pntsText"
+        android:layout_below="@+id/textView8"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="28dp"
+        android:textColor="#ffffffff" />
+
+    <TextSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="136dp"
+        android:id="@+id/textSwitcherGS"
+        android:layout_alignStart="@+id/titleText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Switch Player"
+        android:id="@+id/buttonNext"
+        android:background="@drawable/red"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/textView8"
+        android:layout_alignStart="@+id/textView8"
+        android:layout_below="@+id/pntsText"
+        android:layout_marginTop="45dp"
+        android:textStyle="bold"
+        android:textColor="#ffffffff"
+        android:layout_marginBottom="0dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Game"
+        android:id="@+id/buttonStart"
+        android:layout_alignTop="@+id/buttonNext"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/purple"
+        android:layout_toStartOf="@+id/buttonNext"
+        android:layout_marginRight="10dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Player"
+        android:id="@+id/buttonAdd"
+        android:layout_alignTop="@+id/buttonNext"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/yellow"
+        android:layout_toEndOf="@+id/buttonNext"
+        android:layout_marginLeft="10dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold" />
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_alignTop="@+id/TATV"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
