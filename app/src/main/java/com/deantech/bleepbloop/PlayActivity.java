@@ -19,6 +19,7 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Connection;
@@ -28,6 +29,7 @@ import org.jsoup.nodes.Element;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.util.ArrayList;
@@ -62,7 +64,7 @@ public class PlayActivity extends ActionBarActivity {
     TextView keyTV;
     TextView pntsTV;
     int GS,oldGS,TAS,key,diff,drinks;
-    boolean firstCheck;
+    boolean firstCheck,gameStarted;
     Timer timer;
     List<Integer> playGS;
     List<Integer> playTAS;
@@ -117,6 +119,7 @@ public class PlayActivity extends ActionBarActivity {
         diff = 0;
         firstCheck = true;
         isRunning = true;
+        gameStarted = false;
 
         numPlayers = 1;
         key = Integer.parseInt(keyS2);
@@ -364,6 +367,7 @@ public class PlayActivity extends ActionBarActivity {
             trueScore = "";
             btnAdd.setVisibility(View.VISIBLE);
             btnStart.setVisibility(View.VISIBLE);
+            gameStarted = true;
         }
     }
 
@@ -438,6 +442,25 @@ public class PlayActivity extends ActionBarActivity {
                 timer.purge();
                 timer = new Timer();
                 checkScore();
+                return true;
+            case R.id.load:
+                try {
+                    loadGame();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return true;
+            case R.id.save:
+                if(gameStarted == true) {
+                    try {
+                        saveGame();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -453,6 +476,67 @@ public class PlayActivity extends ActionBarActivity {
         }
         for(int i = 0;i<numPlayers;i++) {
             new scrapeXboxTask().execute(i);
+        }
+    }
+    public void loadGame() throws IOException
+    {
+        String path = this.getFilesDir().getAbsolutePath();
+        File file = new File(path + "/bleepbloopSave.txt");
+        int length = (int) file.length();
+
+        byte[] bytes = new byte[length];
+
+        FileInputStream input = new FileInputStream(file);
+        try {
+            input.read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            input.close();
+        }
+
+        String userInfo = new String(bytes);
+        System.out.println(userInfo);
+    }
+    public void saveGame() throws IOException, JSONException {
+
+        JSONObject gameFriend = new JSONObject();
+        System.out.println(numPlayers);
+        char friendNum = '1';
+        for(int i = 0;i < numPlayers;i++) {
+            try {
+                gameFriend.put("Player" + friendNum, userList.get(i));
+
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            friendNum++;
+        }
+
+        JSONArray jsonArray = new JSONArray();
+
+        jsonArray.put(gameFriend);
+
+        JSONObject gameSave = new JSONObject();
+        gameSave.put("GamerScore",oldGS);
+        gameSave.put("Key",key);
+        gameSave.put("Drinks",drinks);
+        gameSave.put("Remainder",diff);
+        gameSave.put("Friend", jsonArray);
+
+        System.out.println(gameSave);
+        String gameInfo = gameSave.toString();
+        String path = this.getFilesDir().getAbsolutePath();
+        File file = new File(path + "/bleepbloopSave.txt");
+
+        FileOutputStream stream = new FileOutputStream(file);
+        try {
+            stream.write(gameInfo.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            stream.close();
         }
     }
     public void LoadFromFile() throws IOException {

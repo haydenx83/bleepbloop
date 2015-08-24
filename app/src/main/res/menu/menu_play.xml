@@ -17,5 +17,15 @@
         android:title="Reset Friends"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/save"
+        android:title="Save Game"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/load"
+        android:title="Load Game"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 
 </menu>
